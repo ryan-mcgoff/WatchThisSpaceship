@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.rmcgoff.watchthisspaceship.data.database.SpaceXDataBase
 import com.rmcgoff.watchthisspaceship.network.datasource.SpaceXNetworkDataSource
 import com.rmcgoff.watchthisspaceship.ui.theme.WatchThisSpaceshipTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,11 +24,15 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var dataSource: SpaceXNetworkDataSource
 
+    @Inject
+    lateinit var spaceXDataBase: SpaceXDataBase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         GlobalScope.launch {
             val response = dataSource.getAllLaunches()
             Log.d("HELLLLLLLLo", response.toString())
+            spaceXDataBase.launchesDao().getAll()
         }
         setContent {
             WatchThisSpaceshipTheme {
