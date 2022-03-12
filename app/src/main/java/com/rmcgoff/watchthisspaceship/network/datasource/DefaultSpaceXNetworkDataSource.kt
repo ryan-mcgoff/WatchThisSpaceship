@@ -1,8 +1,8 @@
 package com.rmcgoff.watchthisspaceship.network.datasource
 
 import com.rmcgoff.watchthisspaceship.network.SpaceXService
-import com.rmcgoff.watchthisspaceship.network.data.company.Company
-import com.rmcgoff.watchthisspaceship.network.data.launch.Launch
+import com.rmcgoff.watchthisspaceship.network.model.company.Company
+import com.rmcgoff.watchthisspaceship.network.model.launch.Launch
 import javax.inject.Inject
 
 class DefaultSpaceXNetworkDataSource @Inject constructor(

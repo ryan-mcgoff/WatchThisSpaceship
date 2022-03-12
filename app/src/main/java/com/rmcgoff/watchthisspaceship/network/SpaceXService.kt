@@ -1,7 +1,7 @@
 package com.rmcgoff.watchthisspaceship.network
 
-import com.rmcgoff.watchthisspaceship.network.data.company.Company
-import com.rmcgoff.watchthisspaceship.network.data.launch.Launch
+import com.rmcgoff.watchthisspaceship.network.model.company.Company
+import com.rmcgoff.watchthisspaceship.network.model.launch.Launch
 import retrofit2.Response
 import retrofit2.http.GET
 
