@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 fun Cell(
     modifier: Modifier = Modifier,
     leadingComposable: @Composable (() -> Unit)? = null,
+    trailingComposable: @Composable (() -> Unit)? = null,
     content: @Composable (() -> Unit)
 ) {
     Surface(modifier = modifier) {
@@ -42,6 +43,13 @@ fun Cell(
                             end = 32.dp
                         )
                 ) { content() }
+                if (trailingComposable != null) {
+                    Box(
+                        Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(end = 16.dp)
+                    ) { trailingComposable() }
+                }
             }
             Divider()
         }

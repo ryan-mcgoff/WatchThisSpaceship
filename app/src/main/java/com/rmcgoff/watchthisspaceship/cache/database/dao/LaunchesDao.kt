@@ -13,4 +13,7 @@ interface LaunchesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(launches: List<LaunchEntity>)
+
+    @Query("DELETE FROM launch_table")
+    suspend fun deleteAll()
 }

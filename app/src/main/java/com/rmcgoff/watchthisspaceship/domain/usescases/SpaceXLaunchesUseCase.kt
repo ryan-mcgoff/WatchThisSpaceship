@@ -15,7 +15,7 @@ class DefaultSpaceXLaunchesUseCase @Inject constructor(
         try {
             emit(DataResult.Loading())
             kotlinx.coroutines.delay(2000)
-            val response = repository.getCachedLaunchesAscending()
+            val response = repository.getLatestLaunchesAscending()
             emit(DataResult.Success(response))
         } catch (exception: Exception) {
             emit(

@@ -12,7 +12,7 @@ class LaunchEntityMapper @Inject constructor() : Mapper<Launch, LaunchEntity> {
         return LaunchEntity(
             missionName = from.name,
             launchDate = from.date_unix,
-            patchImage = from.links.patch.small,
+            patchImage = from.links.patch.small ?: "",
             rocketName = from.name,
             rocketType = from.name,
             wasSuccessful = from.success

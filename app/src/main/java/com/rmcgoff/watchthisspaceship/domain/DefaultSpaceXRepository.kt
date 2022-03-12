@@ -21,8 +21,12 @@ class DefaultSpaceXRepository @Inject constructor(
 ) : SpaceXRepository {
 
     private suspend fun getLatestLaunchesAndCache() {
+        // Get latest data from Network
         val networkResponse = networkDataSource.getAllLaunches()
         val mappedResponse = launchEntityMapper.mapList(networkResponse)
+        // Clear previous cache
+        database.launchesDao().deleteAll()
+        // Update cache with new data
         database.launchesDao().insertAll(mappedResponse)
     }
 

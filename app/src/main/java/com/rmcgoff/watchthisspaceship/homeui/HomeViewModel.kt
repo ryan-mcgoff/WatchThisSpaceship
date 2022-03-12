@@ -16,6 +16,7 @@ class HomeViewModel @Inject constructor(
     private val spaceXLaunches: SpaceXLaunchesUseCase,
     private val spaceXCompanyInfo: SpaceXCompanyUseCase
 ) : ViewModel() {
+    val state = stateReducer.state
 
     init {
         retrieveLaunches()
