@@ -17,7 +17,7 @@ class DefaultSpaceXLaunchesUseCase @Inject constructor(
 ) : SpaceXLaunchesUseCase {
     override fun doWork(filter: Filter): Flow<DataResult<List<Launch>>> = flow {
         try {
-            emit(DataResult.Loading())
+            emit(DataResult.Loading<List<Launch>>())
             kotlinx.coroutines.delay(2000)
             val response = when (filter) {
                 Filter.ASCENDING -> repository.getLatestLaunchesAscending()
@@ -32,7 +32,7 @@ class DefaultSpaceXLaunchesUseCase @Inject constructor(
             }
             if (cachedResults.isEmpty()) {
                 emit(
-                    DataResult.Error(
+                    DataResult.Error<List<Launch>>(
                         errorMessage = when (exception) {
                             is HttpException -> "Network Error, please check your connection"
                             else -> "Unknown Error"

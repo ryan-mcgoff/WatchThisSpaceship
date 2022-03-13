@@ -13,21 +13,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.rmcgoff.watchthisspaceship.commonui.FilterTopBar
 import com.rmcgoff.watchthisspaceship.commonui.LoadingScreen
+import com.rmcgoff.watchthisspaceship.commonui.WebViewScreen
 import com.rmcgoff.watchthisspaceship.homeui.dialog.Filter
 
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel,
-    onFilterButtonClicked: () -> Unit
+    onFilterButtonClicked: () -> Unit,
+    onLaunchItemClicked: (websiteLink: String) -> Unit
 ) {
     val viewState by homeViewModel.state.observeAsState(initial = HomeViewState.EMPTY)
-    HomeScreenContent(viewState = viewState, onFilterButtonClicked = onFilterButtonClicked)
+    HomeScreenContent(
+        viewState = viewState,
+        onFilterButtonClicked = onFilterButtonClicked,
+        onLaunchItemClicked = onLaunchItemClicked
+    )
 }
 
 @Composable
 fun HomeScreenContent(
     viewState: HomeViewState,
-    onFilterButtonClicked: () -> Unit
+    onFilterButtonClicked: () -> Unit,
+    onLaunchItemClicked: (websiteLink: String) -> Unit
 ) {
     Scaffold(
         scaffoldState = rememberScaffoldState(),
@@ -68,7 +75,12 @@ fun HomeScreenContent(
                 }
                 val launches = viewState.launchesViewState.launches
                 items(launches.size) { pos ->
-                    LaunchCell(launch = launches[pos])
+                    val launchItem = launches[pos]
+                    LaunchCell(launch = launchItem, onClick = {
+                        if (launchItem.wikipediaLink.isNotEmpty()) {
+                            onLaunchItemClicked(launchItem.wikipediaLink)
+                        }
+                    })
                 }
             }
         }

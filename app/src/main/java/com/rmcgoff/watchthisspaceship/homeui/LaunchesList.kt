@@ -1,9 +1,11 @@
 package com.rmcgoff.watchthisspaceship.homeui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
@@ -15,8 +17,12 @@ import com.rmcgoff.watchthisspaceship.domain.model.Launch
 import kotlin.math.absoluteValue
 
 @Composable
-fun LaunchCell(launch: Launch) {
+fun LaunchCell(
+    launch: Launch,
+    onClick: () -> Unit
+) {
     Cell(
+        modifier = Modifier.clickable { onClick.invoke() },
         leadingComposable = {
             Badge(icon = {
                 Image(painter = rememberImagePainter(
