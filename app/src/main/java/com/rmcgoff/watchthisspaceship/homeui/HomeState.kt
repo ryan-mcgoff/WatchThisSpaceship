@@ -3,7 +3,7 @@ package com.rmcgoff.watchthisspaceship.homeui
 import com.rmcgoff.watchthisspaceship.arc.Event
 import com.rmcgoff.watchthisspaceship.arc.StateReducer
 import com.rmcgoff.watchthisspaceship.arc.ViewState
-import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
+import com.rmcgoff.watchthisspaceship.domain.model.Launch
 import com.rmcgoff.watchthisspaceship.homeui.dialog.Filter
 import javax.inject.Inject
 
@@ -20,7 +20,8 @@ class HomeStateReducer @Inject constructor() : StateReducer<HomeViewState, HomeE
                 oldState.copy(
                     launchesViewState = oldState.launchesViewState.copy(
                         loading = false,
-                        launches = event.launches
+                        launches = event.launches,
+                        filter = event.filterUsed
                     ),
                     alertMessage = null
                 )
@@ -66,13 +67,13 @@ data class HomeViewState(
 }
 
 data class CompanyInfoViewState(val loading: Boolean = true, val companyInfo: String = "")
-data class LaunchesViewState(val loading: Boolean = true, val launches: List<LaunchEntity> = emptyList(), val filter: Filter = Filter.ASCENDING)
+data class LaunchesViewState(val loading: Boolean = true, val launches: List<Launch> = emptyList(), val filter: Filter = Filter.ASCENDING)
 
 // State changed events
 sealed class HomeEvent : Event {
     // Launches events
     object LoadingLaunches : HomeEvent()
-    data class LaunchesLoaded(val launches: List<LaunchEntity>) : HomeEvent()
+    data class LaunchesLoaded(val launches: List<Launch>, val filterUsed: Filter) : HomeEvent()
     data class LaunchesError(val errorMessage: String) : HomeEvent()
 
     // Company info events

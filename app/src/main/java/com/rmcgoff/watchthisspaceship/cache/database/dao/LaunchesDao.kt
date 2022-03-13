@@ -11,6 +11,9 @@ interface LaunchesDao {
     @Query("SELECT * FROM launch_table")
     suspend fun getAll(): List<LaunchEntity>
 
+    @Query("SELECT * FROM launch_table ORDER BY launchDateUnix DESC")
+    suspend fun getAllDescendingDate(): List<LaunchEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(launches: List<LaunchEntity>)
 

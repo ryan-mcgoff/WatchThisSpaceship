@@ -8,13 +8,14 @@ import androidx.compose.ui.res.painterResource
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.rmcgoff.watchthisspaceship.R
-import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 import com.rmcgoff.watchthisspaceship.commonui.Badge
 import com.rmcgoff.watchthisspaceship.commonui.Cell
 import com.rmcgoff.watchthisspaceship.commonui.Detail
+import com.rmcgoff.watchthisspaceship.domain.model.Launch
+import kotlin.math.absoluteValue
 
 @Composable
-fun LaunchCell(launch: LaunchEntity) {
+fun LaunchCell(launch: Launch) {
     Cell(
         leadingComposable = {
             Badge(icon = {
@@ -46,9 +47,18 @@ fun LaunchCell(launch: LaunchEntity) {
     ) {
         Column {
             Detail(title = "Mission Name", caption = launch.missionName)
-            Detail(title = "Date/Time", caption = launch.missionName)
+            Detail(title = "Date/Time", caption = "${launch.launchDate} at ${launch.launchTime}")
             Detail(title = "Rocket", caption = launch.rocketName)
-            Detail(title = "Days since", caption = launch.rocketName)
+            Detail(
+                title = "Days ${
+                    if (launch.launchDays < 0) {
+                        "since"
+                    } else {
+                        "from"
+                    }
+                } now",
+                caption = launch.launchDays.absoluteValue.toString()
+            )
         }
     }
 }

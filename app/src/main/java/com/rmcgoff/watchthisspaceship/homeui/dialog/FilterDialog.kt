@@ -10,10 +10,11 @@ import com.rmcgoff.watchthisspaceship.commonui.CustomDialog
 
 @Composable
 fun FilterDialog(
+    title: String = "Sort Order",
     currentSelectedFilter: Filter,
     onFilterSelected: (Filter) -> Unit
 ) {
-    CustomDialog(title = "Sort Order") {
+    CustomDialog(title = title) {
         LazyColumn {
             items(Filter.values().size) { pos ->
                 val filter = Filter.values()[pos]

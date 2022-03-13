@@ -62,7 +62,7 @@ class DefaultSpaceXRepository @Inject constructor(
     override suspend fun getCachedLaunchesDescending(): List<LaunchEntity> {
         return withContext(Dispatchers.IO) {
             // return cache response
-            database.launchesDao().getAll()
+            database.launchesDao().getAllDescendingDate()
         }
     }
 

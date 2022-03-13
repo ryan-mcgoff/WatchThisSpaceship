@@ -3,7 +3,7 @@ package com.rmcgoff.watchthisspaceship.network.model.launch
 import com.google.gson.annotations.SerializedName
 import com.rmcgoff.watchthisspaceship.network.model.common.Links
 
-data class Launch(
+data class LaunchNetwork(
     @SerializedName("links") val links: Links,
     @SerializedName("static_fire_date_utc") val static_fire_date_utc: String,
     @SerializedName("static_fire_date_unix") val static_fire_date_unix: Long,

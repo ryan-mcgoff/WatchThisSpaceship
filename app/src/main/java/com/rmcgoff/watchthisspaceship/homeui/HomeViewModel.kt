@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rmcgoff.watchthisspaceship.domain.DataResult
 import com.rmcgoff.watchthisspaceship.domain.usescases.SpaceXCompanyUseCase
 import com.rmcgoff.watchthisspaceship.domain.usescases.SpaceXLaunchesUseCase
+import com.rmcgoff.watchthisspaceship.homeui.dialog.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,19 +19,24 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     val state = stateReducer.state
 
+    fun filterLaunches(filter: Filter) = retrieveLaunches(filter)
+
     init {
         retrieveLaunches()
         retrieveCompanyInfo()
     }
 
-    private fun retrieveLaunches() {
-        spaceXLaunches.doWork().onEach { dataResult ->
+    private fun retrieveLaunches(filter: Filter = Filter.ASCENDING) {
+        spaceXLaunches.doWork(filter).onEach { dataResult ->
             when (dataResult) {
                 is DataResult.Loading -> {
                     stateReducer.sendEvent(HomeEvent.LoadingLaunches)
                 }
                 is DataResult.Success -> {
-                    stateReducer.sendEvent(HomeEvent.LaunchesLoaded(dataResult.data))
+                    stateReducer.sendEvent(HomeEvent.LaunchesLoaded(
+                        launches = dataResult.data,
+                        filterUsed = filter
+                    ))
                 }
                 is DataResult.Error -> {
                     stateReducer.sendEvent(HomeEvent.LaunchesError(dataResult.errorMessage))
