@@ -38,6 +38,7 @@ fun WatchThisSpaceNavGraph(
     navController: NavHostController = rememberNavController(),
     startDestination: String = MainDestinations.HOME_ROUTE,
 ) {
+    // ViewModel is scoped to the NavGraph
     val viewModel: HomeViewModel = hiltViewModel()
     NavHost(
         navController = navController,
@@ -52,7 +53,8 @@ fun WatchThisSpaceNavGraph(
             HomeScreen(
                 homeViewModel = viewModel,
                 onFilterButtonClicked = { navController.navigate(FILTER_DIALOG_ROUTE) },
-                onLaunchItemClicked = {link ->
+                onLaunchItemClicked = { link ->
+                    // We need to encode the URL for Compose Navigation to accept it as an argument
                     val encodedUrl = URLEncoder.encode(link, StandardCharsets.UTF_8.toString())
                     navController.navigate("$WEB_VIEW_ROUTE/$encodedUrl")
                 }

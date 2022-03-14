@@ -1,9 +1,6 @@
 package com.rmcgoff.watchthisspaceship.domain.usescases
-
-import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 import com.rmcgoff.watchthisspaceship.domain.DataResult
 import com.rmcgoff.watchthisspaceship.domain.SpaceXRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -15,7 +12,6 @@ class DefaultSpaceXCompanyUseCase @Inject constructor(
     override fun doWork(): Flow<DataResult<String>> = flow {
         try {
             emit(DataResult.Loading())
-            delay(2000)
             val response = repository.getCompanyInfo()
             // Transform to company summary
             val companySummary = "${response.companyName} was founded by ${response.founderName} in ${response.year}. " +

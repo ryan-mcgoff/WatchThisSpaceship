@@ -1,5 +1,9 @@
 package com.rmcgoff.watchthisspaceship.domain
 
+import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
+import com.rmcgoff.watchthisspaceship.domain.mapper.LaunchMapper
+import com.rmcgoff.watchthisspaceship.domain.mapper.Mapper
+import com.rmcgoff.watchthisspaceship.domain.model.Launch
 import com.rmcgoff.watchthisspaceship.domain.usescases.DefaultSpaceXCompanyUseCase
 import com.rmcgoff.watchthisspaceship.domain.usescases.DefaultSpaceXLaunchesUseCase
 import com.rmcgoff.watchthisspaceship.domain.usescases.SpaceXCompanyUseCase
@@ -24,4 +28,8 @@ abstract class DomainModule {
     @Binds
     @Singleton
     abstract fun bindsDefaultSpaceCompanyUseCase(default: DefaultSpaceXCompanyUseCase): SpaceXCompanyUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindsDefaultLaunchMapper(default: LaunchMapper): Mapper<LaunchEntity, Launch>
 }
