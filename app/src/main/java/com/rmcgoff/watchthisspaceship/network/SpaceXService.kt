@@ -1,6 +1,6 @@
 package com.rmcgoff.watchthisspaceship.network
 
-import com.rmcgoff.watchthisspaceship.network.model.company.Company
+import com.rmcgoff.watchthisspaceship.network.model.company.CompanyNetwork
 import com.rmcgoff.watchthisspaceship.network.model.launch.LaunchNetwork
 import retrofit2.Response
 import retrofit2.http.GET
@@ -18,5 +18,5 @@ interface SpaceXService {
      * Docs: https://github.com/r-spacex/SpaceX-API/blob/master/docs/company/v4/all.md
      */
     @GET("company")
-    suspend fun getCompany(): Response<Company>
+    suspend fun getCompany(): Response<CompanyNetwork>
 }

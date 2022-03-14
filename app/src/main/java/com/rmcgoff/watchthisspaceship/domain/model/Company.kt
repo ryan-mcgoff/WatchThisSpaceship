@@ -1,6 +1,6 @@
-package com.rmcgoff.watchthisspaceship.cache.entity
+package com.rmcgoff.watchthisspaceship.domain.model
 
-data class CompanyEntity(
+data class Company(
     val companyName: String,
     val founderName: String,
     val year: String,

@@ -3,7 +3,7 @@ package com.rmcgoff.watchthisspaceship.network.model.company
 import com.google.gson.annotations.SerializedName
 import com.rmcgoff.watchthisspaceship.network.model.common.LinksCompact
 
-data class Company(
+data class CompanyNetwork(
     @SerializedName("headquarters") val headquarters: Headquarters,
     @SerializedName("links") val links: LinksCompact,
     @SerializedName("name") val name: String,

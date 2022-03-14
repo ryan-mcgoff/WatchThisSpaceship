@@ -9,6 +9,9 @@ import javax.inject.Inject
 class DefaultSpaceXCompanyUseCase @Inject constructor(
     private val repository: SpaceXRepository
 ) : SpaceXCompanyUseCase {
+    /**
+     * Retrieves company info from repo and constructs a company summary
+     */
     override fun doWork(): Flow<DataResult<String>> = flow {
         try {
             emit(DataResult.Loading())

@@ -26,7 +26,7 @@ abstract class StateReducer<S : ViewState, E : Event>(private val initialViewSta
         _state.postValue(newState)
     }
 
-    // Returns
+    // Returns a new viewstate
     abstract fun reduce(oldState: S, event: E): S
 }
 

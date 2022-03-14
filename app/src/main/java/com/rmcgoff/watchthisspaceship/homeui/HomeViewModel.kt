@@ -17,6 +17,7 @@ class HomeViewModel @Inject constructor(
     private val spaceXLaunches: SpaceXLaunchesUseCase,
     private val spaceXCompanyInfo: SpaceXCompanyUseCase
 ) : ViewModel() {
+    // viewstate for viewlayer to observe
     val state = stateReducer.state
 
     fun filterLaunches(filter: Filter) = retrieveLaunches(filter)

@@ -3,7 +3,6 @@ package com.rmcgoff.watchthisspaceship.domain.usescases
 import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 import com.rmcgoff.watchthisspaceship.domain.DataResult
 import com.rmcgoff.watchthisspaceship.domain.SpaceXRepository
-import com.rmcgoff.watchthisspaceship.domain.mapper.LaunchMapper
 import com.rmcgoff.watchthisspaceship.domain.mapper.Mapper
 import com.rmcgoff.watchthisspaceship.domain.model.Launch
 import com.rmcgoff.watchthisspaceship.homeui.dialog.Filter
@@ -17,6 +16,10 @@ class DefaultSpaceXLaunchesUseCase @Inject constructor(
     private val repository: SpaceXRepository,
     private val launchMapper: Mapper<LaunchEntity, Launch>
 ) : SpaceXLaunchesUseCase {
+    /**
+     * Retrieves launches from repo based on passed filter.
+     * If repo fails, attempt to retrieve data from cache
+     */
     override fun doWork(filter: Filter): Flow<DataResult<List<Launch>>> = flow {
         try {
             emit(DataResult.Loading<List<Launch>>())

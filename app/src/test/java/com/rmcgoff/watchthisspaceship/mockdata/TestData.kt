@@ -1,6 +1,6 @@
 package com.rmcgoff.watchthisspaceship
 
-import com.rmcgoff.watchthisspaceship.cache.entity.CompanyEntity
+import com.rmcgoff.watchthisspaceship.domain.model.Company
 import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 
 val TEST_LAUNCHES_CACHE = listOf(
@@ -39,4 +39,4 @@ val TEST_LAUNCHES_CACHE = listOf(
     )
 )
 
-val TEST_COMPANY = CompanyEntity("","","",0L,0L,"")
+val TEST_COMPANY = Company("","","",0L,0L,"")

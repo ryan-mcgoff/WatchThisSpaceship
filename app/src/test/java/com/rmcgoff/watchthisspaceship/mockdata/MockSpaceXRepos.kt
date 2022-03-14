@@ -2,7 +2,7 @@ package com.rmcgoff.watchthisspaceship.mockdata
 
 import com.rmcgoff.watchthisspaceship.TEST_COMPANY
 import com.rmcgoff.watchthisspaceship.TEST_LAUNCHES_CACHE
-import com.rmcgoff.watchthisspaceship.cache.entity.CompanyEntity
+import com.rmcgoff.watchthisspaceship.domain.model.Company
 import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 import com.rmcgoff.watchthisspaceship.domain.SpaceXRepository
 
@@ -28,7 +28,7 @@ class MockSpaceXRepoNoNetworkConnection : SpaceXRepository {
         return TEST_LAUNCHES_CACHE
     }
 
-    override suspend fun getCompanyInfo(): CompanyEntity {
+    override suspend fun getCompanyInfo(): Company {
         return TEST_COMPANY
     }
 }

@@ -1,7 +1,7 @@
 package com.rmcgoff.watchthisspaceship.domain
 
 import com.rmcgoff.watchthisspaceship.cache.database.SpaceXDataBase
-import com.rmcgoff.watchthisspaceship.cache.entity.CompanyEntity
+import com.rmcgoff.watchthisspaceship.domain.model.Company
 import com.rmcgoff.watchthisspaceship.cache.entity.LaunchEntity
 import com.rmcgoff.watchthisspaceship.domain.mapper.CompanyEntityMapper
 import com.rmcgoff.watchthisspaceship.domain.mapper.LaunchEntityMapper
@@ -69,7 +69,7 @@ class DefaultSpaceXRepository @Inject constructor(
     /**
      * Warning, will throw network error if no available connection. Call in try / catch
      */
-    override suspend fun getCompanyInfo(): CompanyEntity {
+    override suspend fun getCompanyInfo(): Company {
         return withContext(Dispatchers.IO) {
             companyEntityMapper.map(networkDataSource.getCompanyInfo())
         }
